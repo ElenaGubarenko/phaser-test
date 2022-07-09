@@ -1,3 +1,2 @@
-import "./js/flyingBrokenPieces.js"
-
-
+// import "./js/effects/flyingBrokenPieces.js"
+import "./js/games/memoryCards/index.js"

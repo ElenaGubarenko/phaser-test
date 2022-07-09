@@ -1,8 +1,10 @@
  body {
      text-align: center;
+     padding: 0;
+     margin: 0;
  }
 
- /*
+ 
 canvas {
-    border: 1px solid #000;
-} */
+width: 100%;
+} 
