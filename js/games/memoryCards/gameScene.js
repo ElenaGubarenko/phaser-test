@@ -24,8 +24,15 @@ export default class GameScene extends Phaser.Scene {
     this.cards = []
     let positions = this.getCardsPositions()
 
-    positions.map((position) => {
-      this.cards.push(new Card(this, position, "cardBack"))
+    // positions.map((position) => {
+    //   this.cards.push(new Card(this, position, "cardBack"))
+    // })
+
+    configuration.cardsId.map(cardId => {
+      for (let i = 0; i < 2; i++) {
+        this.cards.push(new Card(this, cardId, positions, "cardBack"))
+      }
+
     })
   }
 
