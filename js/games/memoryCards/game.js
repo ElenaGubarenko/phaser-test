@@ -1,12 +1,13 @@
-import "./gameScene.js"
+// import scene from "./gameScene.js"
+import GameScene from './gameScene.js'
 
 let config = {
   type: Phaser.AUTO,
-  scene: new GameScene(),
   width: 1280,
   height: 720,
-  rows: 2,
-  cols: 5,
+  scene: new GameScene(),
 }
 
 let game = new Phaser.Game(config)
+
+

@@ -1,13 +1,14 @@
-import "./card.js"
+import Card from "./card.js"
+import configuration from "../../../configuration.js"
 
-export class GameScene extends Phaser.Scene {
+export default class GameScene extends Phaser.Scene {
   constructor() {
     super("Game")
   }
 
   preload() {
-    this.load.image("back", "/js/games/memoryCards/assets/background.jpg")
-    this.load.image("cardBack", "/js/games/memoryCards/assets/cardBack.png")
+    this.load.image("back", "js/games/memoryCards/assets/background.jpg")
+    this.load.image("cardBack", "js/games/memoryCards/assets/cardBack.png")
   }
 
   create() {
@@ -24,8 +25,7 @@ export class GameScene extends Phaser.Scene {
     let positions = this.getCardsPositions()
 
     positions.map((position) => {
-      this.cards.push(new Card(this, position))
-      // this.add.sprite(position.x, position.y, "cardBack").setOrigin(0, 0)
+      this.cards.push(new Card(this, position, "cardBack"))
     })
   }
 
@@ -34,11 +34,11 @@ export class GameScene extends Phaser.Scene {
     let cardTexture = this.textures.get("cardBack").getSourceImage()
     let cardWidth = cardTexture.width + 7
     let cardHeight = cardTexture.height + 7
-    let paddingX = (this.sys.game.config.width - cardWidth * config.cols) / 2
-    let paddingY = (this.sys.game.config.height - cardHeight * config.rows) / 2
+    let paddingX = (this.sys.game.config.width - cardWidth * configuration.cols) / 2
+    let paddingY = (this.sys.game.config.height - cardHeight * configuration.rows) / 2
 
-    for (let row = 0; row < config.rows; row++) {
-      for (let col = 0; col < config.cols; col++) {
+    for (let row = 0; row < configuration.rows; row++) {
+      for (let col = 0; col < configuration.cols; col++) {
         positions.push({
           x: col * cardWidth + paddingX,
           y: row * cardHeight + paddingY,
