@@ -18,6 +18,7 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.createBackground()
     this.createCards()
+    this.openedCard = null
   }
 
   createBackground() {
@@ -28,14 +29,32 @@ export default class GameScene extends Phaser.Scene {
     this.cards = []
     let counter = 0
     let positions = this.getCardsPositions()
-    console.log(positions)
+
+    Phaser.Utils.Array.Shuffle(positions)
+
     configuration.cards.map((card) => {
       for (let i = 0; i < 2; i++) {
-        this.cards.push(new Card(this, card.id, positions[counter], card.texture))
+        this.cards.push(new Card(this, card, positions[counter], "cardBack"))
         counter += 1
       }
-      console.log(this.cards)
     })
+
+    this.input.on("gameobjectdown", this.onCardClicked, this)
+  }
+
+  onCardClicked(pointer, card)
+  {
+    card.openCard()
+
+    if (this.openedCard && this.openedCard === card.id) {
+      console.log("true")
+      this.openedCard = null
+      return
+    }
+    
+     this.openedCard = card.id
+    console.log(this.openedCard, card.id)
+    
   }
 
   getCardsPositions() {
