@@ -8,6 +8,10 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     this.load.image("back", "js/games/memoryCards/assets/background.jpg")
+    configuration.cards.map((card) =>
+      this.load.image(`${card.texture}`, `js/games/memoryCards/assets/${card.texture}.png`)
+  )
+   
     this.load.image("cardBack", "js/games/memoryCards/assets/cardBack.png")
   }
 
@@ -22,17 +26,15 @@ export default class GameScene extends Phaser.Scene {
 
   createCards() {
     this.cards = []
+    let counter = 0
     let positions = this.getCardsPositions()
-
-    // positions.map((position) => {
-    //   this.cards.push(new Card(this, position, "cardBack"))
-    // })
-
-    configuration.cardsId.map(cardId => {
+    console.log(positions)
+    configuration.cards.map((card) => {
       for (let i = 0; i < 2; i++) {
-        this.cards.push(new Card(this, cardId, positions, "cardBack"))
+        this.cards.push(new Card(this, card.id, positions[counter], card.texture))
+        counter += 1
       }
-
+      console.log(this.cards)
     })
   }
 
